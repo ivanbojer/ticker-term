@@ -55,7 +55,7 @@ func padding(txt string, val int) string {
 	l := utf8.RuneCountInString(txt)
 	if val-l < 0 {
 		err := errors.Errorf("Negative repeat count (%d) for [%s]", val-l, txt)
-		fail(err)
+		panic(err)
 	}
 	return strings.Repeat(" ", val-l)
 }

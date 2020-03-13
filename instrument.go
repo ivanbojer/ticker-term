@@ -107,8 +107,8 @@ func (im InstrumentMap) Technical(sym string, titleAttr color.Attribute) (val st
 		sym = id
 	}
 	if s, ok := im[sym]; ok {
-		ma := tline(s.Row.Ma, s.MaBuy, s.MaSell, titleAttr)
-		ti := tline(s.TechnicalSummary, s.TiBuy, s.TiSell, titleAttr)
+		ma := tline(s.Row.Ma, s.MaBuy, s.MaSell, titleAttr, 10)
+		ti := tline(s.TechnicalSummary, s.TiBuy, s.TiSell, titleAttr, 4)
 
 		return fmt.Sprintf("%s%s", ma, ti)
 	}
@@ -117,7 +117,7 @@ func (im InstrumentMap) Technical(sym string, titleAttr color.Attribute) (val st
 
 /////////////////////////////////////////
 
-func tline(class string, nBuy, nSell int, titleAttr color.Attribute) string {
+func tline(class string, nBuy, nSell int, titleAttr color.Attribute, pad int) string {
 	offset := 6
 
 	var (
@@ -161,6 +161,6 @@ func tline(class string, nBuy, nSell int, titleAttr color.Attribute) string {
 	return fmt.Sprintf("%s %s%s",
 		lbl,
 		cntStr,
-		padding(buyStr+sellStr, 10),
+		padding(buyStr+sellStr, pad),
 	)
 }

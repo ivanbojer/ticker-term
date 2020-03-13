@@ -52,7 +52,7 @@ func (p *Parser) Start(responses chan *http.Response, symbols ...string) (err er
 			if symIdx == 0 {
 				p.header(titlePad, lastPad, changePctPad, changePad)
 			}
-			term.Println(ln + "        ")
+			term.Println(ln)
 
 		}
 
