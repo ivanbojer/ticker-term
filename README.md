@@ -36,3 +36,27 @@ Grab a binary for Linux or macOS on the releases page.
 ## Usage
 
 `ticker-term`
+
+
+## FAQ
+
+1. Why can't I see the inactive tickers? Why are the lines spaced inconsistently?
+
+   Inactive tickers are greyed out if there are no price updates for an extended
+   period of time. You may have to adjust your terminal emulator's color settings
+   if the greyed out items are not visible.
+
+2. I keep getting a message about "sleep mode". What is that?
+
+   If there are no price updates to any of the tickers for several minutes, a notification
+   will appear stating that the application has entered sleep mode. While in sleep mode,
+   checks for new data occur only once every sixty seconds.
+
+
+## Disclaimer
+
+All data sourced from Investing.com. This package is not in any way affiliated
+with Investing.com or its subsidiaries, parents, or affiliates. No claims are 
+made with regard to the accuracy of the data. This package is for research 
+purposes only and is not intended to provide investment or trading advice.
+
