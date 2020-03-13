@@ -9,6 +9,9 @@ Live futures quotes in your terminal.
 ![ScreenShot](screenshots/2.png)
 
 
+![ScreenShot](screenshots/3.png)
+
+
 ## Requirements
 
 Linux or macOS. It *might* work with [Windows 10's new bash shell](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/).
