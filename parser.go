@@ -35,6 +35,8 @@ type Parser struct {
 	t30Avg time.Duration
 
 	symbols []string
+
+	termArea int
 }
 
 func newParser() *Parser {
@@ -45,6 +47,7 @@ func newParser() *Parser {
 		unch:        make(map[string]int),
 		start:       time.Now(),
 		t30:         time.Now(),
+		termArea:    termArea(),
 	}
 
 	for _, sym := range defaultPairsSlice {
@@ -90,7 +93,7 @@ func (p *Parser) header(titlePad, lastPad, changePctPad, changePad int) {
 		hti   = "Technical"
 	)
 
-	head := fmt.Sprintf("%s%s%s%s%s%s%s%s %s%s%s%s",
+	head := fmt.Sprintf("%s%s%s%s%s%s%s%s %s%s%s",
 		hsym,
 		padding(hsym, titlePad),
 		hlast,
@@ -102,8 +105,8 @@ func (p *Parser) header(titlePad, lastPad, changePctPad, changePad int) {
 		hma,
 		padding(hma, 18),
 		hti,
-		padding(hti, 12),
 	)
+	head = head + padding(head, 87)
 	head = color.New(color.BgBlack).Set().Add(color.FgWhite).SprintFunc()(head)
 	term.Println(head)
 }
@@ -124,14 +127,16 @@ func (p *Parser) status() {
 		p.count = 1000
 	}
 
-	status := fmt.Sprintf("\nTarget: 180ms  Avg: %s %s Trailing 30: %s",
+	status := fmt.Sprintf("\nTarget: 180ms  Avg: %s%s Trailing 30: %s%s github.com/zpkg/ticker-term",
 		avg,
-		padding(avg.String(), 12),
+		padding(avg.String(), 6),
 		p.t30Avg,
+		padding(p.t30Avg.String(), 17),
 	)
-	status = status + padding(status, 90)
+	status = status + padding(status, 88)
 	status = color.New(color.BgBlack).Set().Add(color.FgWhite).SprintFunc()(status)
-	term.Println(toColor(status, color.Concealed, color.Concealed))
+	status = toColor(status, color.Concealed, color.Concealed)
+	term.Println(status)
 }
 
 func (p *Parser) getColors(sym string, lastf float64, imap InstrumentMap) (current, title, defaultc color.Attribute) {
@@ -196,7 +201,16 @@ func (p *Parser) pause() {
 	}
 }
 
+func (p *Parser) checkTermArea() {
+	if area := termArea(); area != p.termArea {
+		p.termArea = area
+		p.shouldClear = true
+	}
+}
+
 func (p *Parser) flush() {
+	p.checkTermArea()
+
 	if p.countShouldPause > 250 {
 		p.pause()
 	}

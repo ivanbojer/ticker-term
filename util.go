@@ -9,6 +9,7 @@ import (
 	"github.com/fatih/color"
 	"github.com/kyokomi/emoji"
 	"github.com/pkg/errors"
+	"golang.org/x/crypto/ssh/terminal"
 )
 
 var (
@@ -21,6 +22,11 @@ var (
 func fail(err ...interface{}) {
 	fmt.Println(err...)
 	os.Exit(1)
+}
+
+func termArea() (area int) {
+	w, h, _ := terminal.GetSize(int(os.Stdout.Fd()))
+	return w * h
 }
 
 func toColor(txt string, attr color.Attribute, override color.Attribute) string {
