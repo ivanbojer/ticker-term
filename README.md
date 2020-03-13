@@ -22,9 +22,7 @@ go 1.14
 
 1. [Install go for your platform](https://golang.org/dl/).
 
-2. Clone the repo.
-
-3. CD into the clone path. Run `go install`.
+2. From a terminal, run `go get -u github.com/zpkg/ticker-term`
 
 
 #### Option 2: Pre-compiled binary
