@@ -15,7 +15,7 @@ BRANCH_NAME=$(shell git branch | grep '*' | tr -d ' *')
 COMMIT_SHA=$(shell git show HEAD --format=%H | head -n 1)
 
 GIT_CURRENT_TAG=$(shell git describe --all --exact-match `git rev-parse HEAD` | grep tags | sed 's/tags\///')
-GIT_LAST_TAG=$(shell git tag | head -n 1)
+GIT_LAST_TAG=$(shell git tag | tail -n 1)
 GIT_TAG=$(shell echo $(GIT_LAST_TAG) | tr -d v )
 
 COMMIT_SHA_SHORT=$(shell git rev-parse --short HEAD)
@@ -94,7 +94,7 @@ debug:
 	echo "GO_PKG_NAME $(GO_PKG_NAME)"
 	echo "BRANCH_NAME $(BRANCH_NAME)"
 	echo "COMMIT_SHA $(COMMIT_SHA)"
-	echo "GIT_TAG $(GIT_LAST_TAG)"
+	echo "GIT_TAG $(GIT_TAG)"
 
 test:
 	@echo -e $(filter-out $@,$(MAKECMDGOALS))
